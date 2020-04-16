@@ -18,8 +18,8 @@ export default function Scan(props) {
 
   return (
     <div className={classes.scan}>
-      <Typography variant="h6">Cash-in Transaction</Typography>
-      <Typography variant="body2" color="textSecondary" gutterBottom>Scan or Enter employee number below to start loading employee's account</Typography>
+      <Typography variant="h6">POS Transaction</Typography>
+      <Typography variant="body2" color="textSecondary" gutterBottom>Scan or Enter employee number below to start payment</Typography>
       <Paper elevation={0} >
         <CardContent>
           <Grid container>
@@ -30,14 +30,15 @@ export default function Scan(props) {
                 label="Barcode / Employee number" 
                 fullWidth 
                 variant="outlined" 
-                autoFocus 
                 placeholder="Employee Number" 
                 onClick={props.handleEmployeeNumberOnClick}
+                autoFocus={props.autoFocus}
               />
             </Grid>
           </Grid>
         </CardContent>
       </Paper>
     </div>
+    
   );
 }

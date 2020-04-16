@@ -1,20 +1,14 @@
 import React, {Fragment, useState, useEffect} from 'react';
-import AppBar from '../components/AppBar';
+import AppBarPOS from '../components/AppBarPOS';
 import ScanLayout from '../components/ScanLayout';
-import Scan from '../components/Scan';
+import ScanPOS from '../components/ScanPOS';
 import ResultLayout from '../components/ResultLayout';
-import Result from '../components/Result';
+import ResultPOS from '../components/ResultPOS';
 import TransactionLayout from '../components/TransactionLayout';
 import Transaction from '../components/Transaction';
 import { withAuthSync, logout } from '../utils/auth';
 import nextCookie from 'next-cookies';
-import Container from '@material-ui/core/Container';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import Link from 'next/link';
+
 
 function Index(props) {
   //console.log(props);
@@ -93,7 +87,15 @@ function Index(props) {
     setOpenNext(false);
   }
   const handleClickCloseAlert = () => {
-    setOpenAlert(false)
+    setEmployee_number('');
+    setCostOfGoods('');
+    setOpenAlert(false);
+  }
+
+  // cost of goods ---------------
+  const [ costOfGoods, setCostOfGoods ] = useState('');
+  const handleOnChangeCostOfGoods = (e) => {
+    setCostOfGoods(e.target.value);
   }
 
   // get acccount info ----------
@@ -175,34 +177,71 @@ function Index(props) {
 
   }
 
+  async function handleSubmitPOS(){
+    setOpenNext(false);
+    setOpenBackrop(!openBackdrop)
 
+    let route = 'http://dev-metaspf401.sunpowercorp.com:4848/pointofsaletransaction'
+
+    let response = await fetch(`${route}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        token: props.token,
+        id: userData.id,
+        username: canteenUserData.username, // login canteen credentials first...
+        organization: canteenUserData.organization,
+        available_balance: userData.available_balance,
+        cost_of_goods_purchased: costOfGoods
+      })
+    })
+
+    if(response.status === 200){
+      setResponseMessage(await response.json());
+      setOpenAlert(true);
+      setOpenBackrop(false)
+    }
+
+  }
 
   return (
     <Fragment>
-      <AppBar logout={logout} />
-      <Container maxWidth="sm">
-        <div style={{marginTop: 20, marginBottom: 20}}>
-        <Typography variant="body2" color="textSecondary" gutterBottom>Select your mode</Typography>
-        <Grid container>
-          <Grid item xs={12} sm={12} md={12} lg={12}>
-            <Button fullWidth variant="outlined" style={{height: 200}}>
-              <Typography variant="h6">Point-of-Sale</Typography>
-            </Button>
-          </Grid>
-        </Grid>
-        </div>
-        <div>
-        <Grid container>
-          <Grid item xs={12} sm={12} md={12} lg={12}>
-            <Link href="/loader">
-            <Button fullWidth variant="outlined"  style={{height: 200 }}>
-              <Typography variant="h6">Cash-in</Typography>
-            </Button>
-            </Link>
-          </Grid>
-        </Grid> 
-        </div>
-      </Container>
+      <AppBarPOS logout={logout} />
+      <ScanLayout>
+        <ScanPOS employee_number={employee_number} handleEmployeeNumberOnChange={handleEmployeeNumberOnChange} handleEmployeeNumberOnClick={handleEmployeeNumberOnClick} autoFocus={true} />
+      </ScanLayout>
+      <ResultLayout>
+      { 
+        userData ?
+          userData.id == employee_number  ?  // will be replaced soon... with data from the server.
+          <ResultPOS 
+            userData={userData}
+            selectCash100={selectCash100}
+            selectCash200={selectCash200}
+            selectCash500={selectCash500}
+            handleSearchCancel={handleSearchCancel}
+            handleCashOnToggle100={handleCashOnToggle100}
+            handleCashOnToggle200={handleCashOnToggle200}
+            handleCashOnToggle500={handleCashOnToggle500}
+            selectedCashValue={selectedCashValue}
+            handleSubmitLoadAccount={handleSubmitLoadAccount}
+            responseMessage={responseMessage}
+            openNext={openNext}
+            handleClickOpenNext={handleClickOpenNext}
+            handleCloseNext={handleCloseNext}
+            openAlert={openAlert}
+            handleClickOpenAlert={handleClickOpenAlert}
+            handleClickCloseAlert={handleClickCloseAlert}
+            openBackdrop={openBackdrop}
+            canteenUserData={canteenUserData}
+            costOfGoods={costOfGoods}
+            handleOnChangeCostOfGoods={handleOnChangeCostOfGoods}
+            handleSubmitPOS={handleSubmitPOS}
+          />
+          :<></>
+        :<></>
+      }
+      </ResultLayout>
     </Fragment>
   );
 }

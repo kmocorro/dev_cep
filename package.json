@@ -17,6 +17,7 @@
     "prop-types": "latest",
     "react": "latest",
     "react-dom": "latest",
+    "react-number-format": "^4.4.1",
     "swr": "^0.1.18",
     "uuid": "^3.4.0"
   },

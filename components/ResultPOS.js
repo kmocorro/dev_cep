@@ -99,57 +99,22 @@ export default function Result(props) {
       <CardContent>
         <Grid container spacing={1}>
           <Grid item xs={12} sm={12} md={12} lg={12}>
-            <Typography color="textSecondary" align="left">Select amount</Typography>
-            <Typography className={classes.accountValues} align="left" variant="h5" gutterBottom>Cash-In</Typography>
-          </Grid>
-          <Grid item xs={4} sm={4} md={4} lg={4}>
-            {
-              props.selectCash100 ?
-              <Button fullWidth className={classes.button} variant="contained" color="secondary" onClick={props.handleCashOnToggle100}>
-                <Typography className={classes.accountValues}  variant="h5">₱100</Typography>
-              </Button>
-              :
-              <Button fullWidth className={classes.button} variant="outlined" onClick={props.handleCashOnToggle100}>
-                <Typography className={classes.accountValues}  variant="h5">₱100</Typography>
-              </Button>
-            }
-          </Grid>
-          <Grid item xs={4} sm={4} md={4} lg={4}>
-            {
-              props.selectCash200 ?
-              <Button fullWidth className={classes.button} variant="contained" color="secondary" onClick={props.handleCashOnToggle200}>
-                <Typography className={classes.accountValues}  variant="h5">₱200</Typography>
-              </Button>
-              :
-              <Button fullWidth className={classes.button} variant="outlined" onClick={props.handleCashOnToggle200}>
-                <Typography className={classes.accountValues}  variant="h5">₱200</Typography>
-              </Button>
-            }
-          </Grid>
-          <Grid item xs={4} sm={4} md={4} lg={4}>
-            {
-              props.selectCash500 ?
-              <Button fullWidth className={classes.button} variant="contained" color="secondary" onClick={props.handleCashOnToggle500}>
-                <Typography className={classes.accountValues}  variant="h5">₱500</Typography>
-              </Button>
-              :
-              <Button fullWidth className={classes.button} variant="outlined" onClick={props.handleCashOnToggle500}>
-                <Typography className={classes.accountValues}  variant="h5">₱500</Typography>
-              </Button>
-            }
+            <Typography color="textSecondary" align="left">Enter amount</Typography>
+            <Typography className={classes.accountValues} align="left" variant="h5" gutterBottom>Cost of goods</Typography>
+            <TextField  pattern="[0-9]*" value={props.costOfGoods} onChange={props.handleOnChangeCostOfGoods} fullWidth variant="outlined" type="number" />
           </Grid>
         </Grid>
       </CardContent>
       {
-        props.selectedCashValue ? 
+        props.costOfGoods ? 
           <>
             <CardContent>
               <Grid container>
                 <Grid item xs={6} sm={6} md={6} lg={6}>
-                  <Typography>Selected amount </Typography>
+                  <Typography>Total Amount </Typography>
                 </Grid>
                 <Grid item xs={6} sm={6} md={6} lg={6}>
-                  <Typography className={classes.accountValues} variant="h6"  align="right" gutterBottom>₱{props.selectedCashValue}.00</Typography>
+                  <Typography className={classes.accountValues} variant="h6"  align="right" gutterBottom>₱{props.costOfGoods}.00</Typography>
                 </Grid>
               </Grid>
             </CardContent>
@@ -171,11 +136,11 @@ export default function Result(props) {
                     <DialogTitle id="alert-dialog-title">{"Load Confirmation"}</DialogTitle>
                     <DialogContent>
                       <DialogContentText id="alert-dialog-description">
-                        A total of ₱{props.selectedCashValue}.00 will be loaded to {props.userData.name}'s account
+                        A total of ₱{props.costOfGoods}.00 will be deducted to {props.userData.name}'s account
                       </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                      <Button onClick={props.handleSubmitLoadAccount} color="secondary" autoFocus variant="contained">
+                      <Button onClick={props.handleSubmitPOS} color="secondary" autoFocus variant="contained">
                         Confirm
                       </Button>
                       <Button onClick={props.handleCloseNext} color="default">

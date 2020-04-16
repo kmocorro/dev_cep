@@ -6,6 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import EmojiFoodBeverageOutlined from '@material-ui/icons/EmojiFoodBeverageOutlined';
 import ExitToAppOutlined from '@material-ui/icons/ExitToAppOutlined';
+import AccountBalanceWalletOutlinedIcon from '@material-ui/icons/AccountBalanceWalletOutlined';
+
 import { Button } from '@material-ui/core';
 import Link from 'next/link';
 
@@ -28,11 +30,18 @@ export default function Navbar(props) {
     <AppBar position="static" style={{backgroundColor: '#fff', color: '#000', boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2)'}}>
       <Toolbar>
         <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-          <EmojiFoodBeverageOutlined />
+          <Link href="/">
+            <EmojiFoodBeverageOutlined />
+          </Link>
         </IconButton>
         <Typography className={classes.appBarTitle} variant="h6" color="inherit">
           Canteen Electronic Payment
         </Typography>
+        <Link href="/loader">
+          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+            <AccountBalanceWalletOutlinedIcon />
+          </IconButton>
+        </Link>
         <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={props.logout}>
           <ExitToAppOutlined />
         </IconButton>

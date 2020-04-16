@@ -1,5 +1,5 @@
 import React, {Fragment, useState, useEffect} from 'react';
-import AppBar from '../components/AppBar';
+import AppBarLoader from '../components/AppBarLoader';
 import ScanLayout from '../components/ScanLayout';
 import Scan from '../components/Scan';
 import ResultLayout from '../components/ResultLayout';
@@ -8,13 +8,7 @@ import TransactionLayout from '../components/TransactionLayout';
 import Transaction from '../components/Transaction';
 import { withAuthSync, logout } from '../utils/auth';
 import nextCookie from 'next-cookies';
-import Container from '@material-ui/core/Container';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import Link from 'next/link';
+
 
 function Index(props) {
   //console.log(props);
@@ -93,6 +87,11 @@ function Index(props) {
     setOpenNext(false);
   }
   const handleClickCloseAlert = () => {
+    setEmployee_number('');
+    setSelectedCashValue(''); 
+    setSelectCash100(false);
+    setSelectCash200(false);
+    setSelectCash500(false);
     setOpenAlert(false)
   }
 
@@ -176,33 +175,41 @@ function Index(props) {
   }
 
 
-
   return (
     <Fragment>
-      <AppBar logout={logout} />
-      <Container maxWidth="sm">
-        <div style={{marginTop: 20, marginBottom: 20}}>
-        <Typography variant="body2" color="textSecondary" gutterBottom>Select your mode</Typography>
-        <Grid container>
-          <Grid item xs={12} sm={12} md={12} lg={12}>
-            <Button fullWidth variant="outlined" style={{height: 200}}>
-              <Typography variant="h6">Point-of-Sale</Typography>
-            </Button>
-          </Grid>
-        </Grid>
-        </div>
-        <div>
-        <Grid container>
-          <Grid item xs={12} sm={12} md={12} lg={12}>
-            <Link href="/loader">
-            <Button fullWidth variant="outlined"  style={{height: 200 }}>
-              <Typography variant="h6">Cash-in</Typography>
-            </Button>
-            </Link>
-          </Grid>
-        </Grid> 
-        </div>
-      </Container>
+      <AppBarLoader logout={logout} />
+      <ScanLayout>
+        <Scan employee_number={employee_number} handleEmployeeNumberOnChange={handleEmployeeNumberOnChange} handleEmployeeNumberOnClick={handleEmployeeNumberOnClick} />
+      </ScanLayout>
+      <ResultLayout>
+      { 
+        userData ?
+          userData.id == employee_number  ?  // will be replaced soon... with data from the server.
+          <Result 
+            userData={userData}
+            selectCash100={selectCash100}
+            selectCash200={selectCash200}
+            selectCash500={selectCash500}
+            handleSearchCancel={handleSearchCancel}
+            handleCashOnToggle100={handleCashOnToggle100}
+            handleCashOnToggle200={handleCashOnToggle200}
+            handleCashOnToggle500={handleCashOnToggle500}
+            selectedCashValue={selectedCashValue}
+            handleSubmitLoadAccount={handleSubmitLoadAccount}
+            responseMessage={responseMessage}
+            openNext={openNext}
+            handleClickOpenNext={handleClickOpenNext}
+            handleCloseNext={handleCloseNext}
+            openAlert={openAlert}
+            handleClickOpenAlert={handleClickOpenAlert}
+            handleClickCloseAlert={handleClickCloseAlert}
+            openBackdrop={openBackdrop}
+            canteenUserData={canteenUserData}
+          />
+          :<></>
+        :<></>
+      }
+      </ResultLayout>
     </Fragment>
   );
 }
