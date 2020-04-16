@@ -185,9 +185,11 @@ function Index(props) {
         <Typography variant="body2" color="textSecondary" gutterBottom>Select your mode</Typography>
         <Grid container>
           <Grid item xs={12} sm={12} md={12} lg={12}>
+            <Link href="/pos">
             <Button fullWidth variant="outlined" style={{height: 200}}>
               <Typography variant="h6">Point-of-Sale</Typography>
             </Button>
+            </Link>
           </Grid>
         </Grid>
         </div>
