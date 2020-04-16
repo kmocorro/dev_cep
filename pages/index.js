@@ -175,8 +175,6 @@ function Index(props) {
 
   }
 
-
-
   return (
     <Fragment>
       <AppBar logout={logout} />

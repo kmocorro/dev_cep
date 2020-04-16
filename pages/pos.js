@@ -173,6 +173,7 @@ function Index(props) {
       setResponseMessage(await response.json());
       setOpenAlert(true);
       setOpenBackrop(false)
+      setOpenNext(false);
     }
 
   }
@@ -200,6 +201,7 @@ function Index(props) {
       setResponseMessage(await response.json());
       setOpenAlert(true);
       setOpenBackrop(false)
+      setCostOfGoods('');
     }
 
   }
