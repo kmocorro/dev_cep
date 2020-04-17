@@ -133,7 +133,7 @@ export default function Result(props) {
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
                   >
-                    <DialogTitle id="alert-dialog-title">{"Load Confirmation"}</DialogTitle>
+                    <DialogTitle id="alert-dialog-title">{"Payment Confirmation"}</DialogTitle>
                     <DialogContent>
                       <DialogContentText id="alert-dialog-description">
                         A total of ₱{props.costOfGoods}.00 will be deducted to {props.userData.name}'s account
