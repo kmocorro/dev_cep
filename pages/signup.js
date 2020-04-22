@@ -52,7 +52,7 @@ export default function SignUp() {
   const signup_name = useForm('');
   const signup_organization = useForm('');
   const signup_username = useForm('');
-  const signup_username_maxChar = 3;
+  const signup_username_maxChar = 15;
   const signup_password = useForm('');
   const signup_password_maxChar = 8;
   
@@ -162,7 +162,6 @@ export default function SignUp() {
                 id="username"
                 label="Username"
                 onChange={signup_username.onChange}
-                helperText={`${signup_username.count} / ${signup_username_maxChar}`}
               />
             </Grid>
             <Grid item xs={12}>
@@ -176,7 +175,12 @@ export default function SignUp() {
                 id="password"
                 autoComplete="current-password"
                 onChange={signup_password.onChange}
-                helperText={`${signup_password.count} / ${signup_password_maxChar}`}
+                helperText={
+                  signup_password.count >= signup_password_maxChar ?
+                  ''
+                  :
+                  `${signup_password.count} / ${signup_password_maxChar}`
+                }
               />
             </Grid>
           </Grid>
@@ -194,7 +198,7 @@ export default function SignUp() {
               </Button>
             :
             responseMessage.status !== 'success' ? 
-              signup_username_maxChar == signup_username.count && signup_password_maxChar == signup_password.count ?
+              signup_password.count >= signup_password_maxChar ?
               
               <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit} onClick={handleOnSubmit}>
                 Sign Up
@@ -212,7 +216,7 @@ export default function SignUp() {
           }
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/signin" variant="body2">
                 Already have an account? Sign in
               </Link>
             </Grid>
