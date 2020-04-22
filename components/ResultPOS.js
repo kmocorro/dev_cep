@@ -50,6 +50,9 @@ export default function Result(props) {
     <Paper elevation={0}  className={classes.result}>
       <CardContent>
         <Grid container>
+          <Grid item xs={12} sm={12} md={12} lg={12}>
+            <Typography color="textPrimary" align="center" variant="h2" gutterBottom>{props.userData.name}</Typography>
+          </Grid>
           <Grid item xs={12} sm={12} md={4} lg={4}>
             <Typography color="textSecondary" align="left">Balance</Typography>
             <Typography className={classes.accountValues} align="left" variant="h5" gutterBottom>₱{props.userData.available_balance}</Typography>
