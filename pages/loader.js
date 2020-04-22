@@ -22,9 +22,15 @@ function Index(props) {
   }
   const handleEmployeeNumberOnChange = (e) => {
     setEmployee_number(e.target.value);
+    setResponseMessage('');
+    setSelectedCashValue('');
+    setSelectCash100(false);
+    setSelectCash200(false);
+    setSelectCash500(false);
   }
   const handleSearchCancel = () => {
     setEmployee_number('');
+    setResponseMessage('');
     setSelectedCashValue('');
     setSelectCash100(false);
     setSelectCash200(false);
@@ -77,6 +83,12 @@ function Index(props) {
     setOpenAlert(false)
   };
   const handleCloseNext = () => {
+    setEmployee_number('');
+    setResponseMessage('');
+    setSelectedCashValue('');
+    setSelectCash100(false);
+    setSelectCash200(false);
+    setSelectCash500(false);
     setOpenNext(false);
   };
 

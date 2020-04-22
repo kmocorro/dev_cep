@@ -50,6 +50,9 @@ export default function Result(props) {
     <Paper elevation={0}  className={classes.result}>
       <CardContent>
         <Grid container>
+          <Grid item xs={12} sm={12} md={12} lg={12}>
+            <Typography color="textPrimary" align="center" variant="h2" gutterBottom>{props.userData.name}</Typography>
+          </Grid>
           <Grid item xs={12} sm={12} md={4} lg={4}>
             <Typography color="textSecondary" align="left">Balance</Typography>
             <Typography className={classes.accountValues} align="left" variant="h5" gutterBottom>₱{props.userData.available_balance}</Typography>
@@ -158,35 +161,39 @@ export default function Result(props) {
                 <Grid item>
                   <Button className={classes.buttonNext} align="right" variant="text" color="secondary" onClick={props.handleSearchCancel} >Cancel</Button>
                 </Grid>
-                <Grid item xs={3} sm={3} md={3} lg={3}>
+                {
+                  props.responseMessage ? <></> :
+                  
+                  <Grid item xs={3} sm={3} md={3} lg={3}>
                     <Button fullWidth className={classes.buttonNext} align="right" variant="contained" color="secondary" onClick={props.handleClickOpenNext}>
                       Next
                     </Button>
-                  <Dialog
-                    open={props.openNext}
-                    onClose={props.handleCloseNext}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description"
-                  >
-                    <DialogTitle id="alert-dialog-title">{"Load Confirmation"}</DialogTitle>
-                    <DialogContent>
-                      <DialogContentText id="alert-dialog-description">
-                        A total of ₱{props.selectedCashValue}.00 will be loaded to {props.userData.name}'s account
-                      </DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                      <Button onClick={props.handleSubmitLoadAccount} color="secondary" autoFocus variant="contained">
-                        Confirm
-                      </Button>
-                      <Button onClick={props.handleCloseNext} color="default">
-                        Cancel
-                      </Button>
-                    </DialogActions>
-                  </Dialog>
-                  <Backdrop className={classes.backdrop} open={props.openBackdrop}>
-                    <CircularProgress color="inherit" />
-                  </Backdrop>
-                </Grid>
+                    <Dialog
+                      open={props.openNext}
+                      onClose={props.handleCloseNext}
+                      aria-labelledby="alert-dialog-title"
+                      aria-describedby="alert-dialog-description"
+                    >
+                      <DialogTitle id="alert-dialog-title">{"Load Confirmation"}</DialogTitle>
+                      <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                          A total of ₱{props.selectedCashValue}.00 will be loaded to {props.userData.name}'s account
+                        </DialogContentText>
+                      </DialogContent>
+                      <DialogActions>
+                        <Button onClick={props.handleSubmitLoadAccount} color="secondary" autoFocus variant="contained">
+                          Confirm
+                        </Button>
+                        <Button onClick={props.handleCloseNext} color="default">
+                          Cancel
+                        </Button>
+                      </DialogActions>
+                    </Dialog>
+                    <Backdrop className={classes.backdrop} open={props.openBackdrop}>
+                      <CircularProgress color="inherit" />
+                    </Backdrop>
+                  </Grid>
+                }
               </Grid>
             </CardActions>
           </>
