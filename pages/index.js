@@ -191,12 +191,23 @@ function Index(props) {
           </Grid>
         </Grid>
         </div>
-        <div>
+        <div  style={{marginTop: 20, marginBottom: 20}}>
         <Grid container>
           <Grid item xs={12} sm={12} md={12} lg={12}>
             <Link href="/loader">
             <Button fullWidth variant="outlined"  style={{height: 200 }}>
-              <Typography variant="h6">Cash-in</Typography>
+              <Typography variant="h6">Loading Stating / Cash-in</Typography>
+            </Button>
+            </Link>
+          </Grid>
+        </Grid> 
+        </div>
+        <div>
+        <Grid container>
+          <Grid item xs={12} sm={12} md={12} lg={12}>
+            <Link href="/dashboard">
+            <Button fullWidth variant="outlined"  style={{height: 200 }}>
+              <Typography variant="h6">Dashboard</Typography>
             </Button>
             </Link>
           </Grid>

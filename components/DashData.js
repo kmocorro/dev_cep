@@ -47,7 +47,7 @@ export default function DashData(props) {
             <Typography>Receipts</Typography>
             <Typography variant="h2">
               {
-                props.transactionCount[0] && props.transactionCount[0] !== 'null' && props.transactionCount[0] !== 'undefined' ?
+                props.transactionCount[0] && props.transactionCount[0] !== 'null' && props.transactionCount[0] !== 'undefined' && props.transactionCount[0] !== null ?
                 props.transactionCount[0].queryresult
                 : 0
               }
@@ -57,7 +57,7 @@ export default function DashData(props) {
             <Typography>Net Sales</Typography>
             <Typography  variant="h2">
               {
-                props.netSales[0] && props.netSales[0] !== 'null' && props.netSales[0] !== 'undefined' ?
+                props.netSales[0] && props.netSales[0] !== 'null' && props.netSales[0] !== 'undefined' && props.netSales[0] !== null ?
                 props.netSales[0].queryresult
                 : 0
               }
