@@ -310,7 +310,7 @@ function Index(props) {
     fetchCanteenNetSales()
   }, [shift])
 
-  console.log(netSales[0], totalLoadedAmount[0], transactionCount[0])
+  console.log(netSales, totalLoadedAmount, transactionCount)
 
 
   return (
