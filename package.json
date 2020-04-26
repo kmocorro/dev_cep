@@ -7,7 +7,7 @@
     "@material-ui/core": "latest",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.42",
-    "@material-ui/pickers": "^3.2.9",
+    "@material-ui/pickers": "^3.2.10",
     "clsx": "latest",
     "js-cookie": "^2.2.1",
     "moment": "^2.24.0",
