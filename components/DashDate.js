@@ -48,6 +48,7 @@ export default function DashDatePicker(props) {
             <DatePicker
               disableToolbar
               fullWidth
+              margin={"dense"}
               autoOk
               variant="inline"
               inputVariant="outlined"
@@ -61,6 +62,7 @@ export default function DashDatePicker(props) {
               disableToolbar
               fullWidth
               autoOk
+              margin={"dense"}
               variant="inline"
               inputVariant="outlined"
               label="End Date"
@@ -72,6 +74,7 @@ export default function DashDatePicker(props) {
             <TextField
               id="outlined-select-shift"
               fullWidth
+              margin={"dense"}
               select
               label="Shift"
               value={props.shift}

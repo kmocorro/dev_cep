@@ -166,6 +166,7 @@ function Index(props) {
   const [ netSales, setNetSales ] = useState({});
   const [ totalLoadedAmount, setTotalLoadedAmount ] = useState({});
   const [ transactionCount, setTransactionCount ] = useState({});
+  const [ transactionLog, setTransactionLog ] = useState({});
 
 
   // get report agad agad
@@ -241,6 +242,30 @@ function Index(props) {
 
   // get report agad agad
   useEffect(() => {
+    async function fetchCanteenTransactionLogs(){
+      let route = 'http://dev-metaspf401.sunpowercorp.com:4849/gettransactionlogs'
+      
+      let response = await fetch(`${route}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          token: props.token,
+          start_date: moment(startDate).format('YYYY-MM-DD'),
+          end_date: moment(endDate).format('YYYY-MM-DD'),
+          shift: shift
+        }) 
+      })
+
+      if(response.status === 200){
+        setTransactionLog(await response.json())
+      }
+    }
+
+    fetchCanteenTransactionLogs()
+  }, [endDate])
+
+  // get report agad agad
+  useEffect(() => {
     async function fetchCanteenNetSales(){
       let route = 'http://dev-metaspf401.sunpowercorp.com:4849/getnetsales'
       
@@ -310,7 +335,31 @@ function Index(props) {
     fetchCanteenNetSales()
   }, [shift])
 
-  console.log(netSales, totalLoadedAmount, transactionCount)
+  // get report agad agad
+  useEffect(() => {
+    async function fetchCanteenTransactionLogs(){
+      let route = 'http://dev-metaspf401.sunpowercorp.com:4849/gettransactionlogs'
+      
+      let response = await fetch(`${route}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          token: props.token,
+          start_date: moment(startDate).format('YYYY-MM-DD'),
+          end_date: moment(endDate).format('YYYY-MM-DD'),
+          shift: shift
+        }) 
+      })
+
+      if(response.status === 200){
+        setTransactionLog(await response.json())
+      }
+    }
+
+    fetchCanteenTransactionLogs()
+  }, [shift])
+
+  //console.log(netSales, totalLoadedAmount, transactionCount, transactionLog)
 
 
   return (
@@ -328,6 +377,7 @@ function Index(props) {
         netSales={netSales}
         totalLoadedAmount={totalLoadedAmount}
         transactionCount={transactionCount}
+        transactionLog={transactionLog}
       />
     </Fragment>
   );
