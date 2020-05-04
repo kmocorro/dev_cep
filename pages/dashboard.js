@@ -191,6 +191,101 @@ function Index(props) {
     }
 
     fetchCanteenNetSales()
+  }, [startDate])
+  // get report agad agad
+  useEffect(() => {
+    async function fetchCanteenNetSales(){
+      let route = 'http://dev-metaspf401.sunpowercorp.com:4849/gettotalloadedamount'
+      
+      let response = await fetch(`${route}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          token: props.token,
+          start_date: moment(startDate).format('YYYY-MM-DD'),
+          end_date: moment(endDate).format('YYYY-MM-DD'),
+          shift: shift
+        }) 
+      })
+
+      if(response.status === 200){
+        setTotalLoadedAmount(await response.json())
+      }
+    }
+
+    fetchCanteenNetSales()
+  }, [startDate])
+  
+  // get report agad agad
+  useEffect(() => {
+    async function fetchCanteenNetSales(){
+      let route = 'http://dev-metaspf401.sunpowercorp.com:4849/gettransactioncounts'
+      
+      let response = await fetch(`${route}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          token: props.token,
+          start_date: moment(startDate).format('YYYY-MM-DD'),
+          end_date: moment(endDate).format('YYYY-MM-DD'),
+          shift: shift
+        }) 
+      })
+
+      if(response.status === 200){
+        setTransactionCount(await response.json())
+      }
+    }
+
+    fetchCanteenNetSales()
+  }, [startDate])
+
+  // get report agad agad
+  useEffect(() => {
+    async function fetchCanteenTransactionLogs(){
+      let route = 'http://dev-metaspf401.sunpowercorp.com:4849/gettransactionlogs'
+      
+      let response = await fetch(`${route}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          token: props.token,
+          start_date: moment(startDate).format('YYYY-MM-DD'),
+          end_date: moment(endDate).format('YYYY-MM-DD'),
+          shift: shift
+        }) 
+      })
+
+      if(response.status === 200){
+        setTransactionLog(await response.json())
+      }
+    }
+
+    fetchCanteenTransactionLogs()
+  }, [startDate])
+
+  // get report agad agad
+  useEffect(() => {
+    async function fetchCanteenNetSales(){
+      let route = 'http://dev-metaspf401.sunpowercorp.com:4849/getnetsales'
+      
+      let response = await fetch(`${route}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          token: props.token,
+          start_date: moment(startDate).format('YYYY-MM-DD'),
+          end_date: moment(endDate).format('YYYY-MM-DD'),
+          shift: shift
+        }) 
+      })
+
+      if(response.status === 200){
+        setNetSales(await response.json())
+      }
+    }
+
+    fetchCanteenNetSales()
   }, [endDate])
   // get report agad agad
   useEffect(() => {

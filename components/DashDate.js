@@ -52,6 +52,7 @@ export default function DashDatePicker(props) {
               autoOk
               variant="inline"
               inputVariant="outlined"
+              maxDate={props.endDate}
               label="Start Date"
               value={props.startDate}
               onChange={props.handleStartDateChange}
@@ -86,6 +87,9 @@ export default function DashDatePicker(props) {
               </MenuItem>
               <MenuItem key="PM" value="PM">
                 PM
+              </MenuItem>
+              <MenuItem key="ALL" value="ALL">
+                ALL
               </MenuItem>
             </TextField>
           </Grid>
