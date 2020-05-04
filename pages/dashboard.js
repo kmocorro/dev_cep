@@ -456,10 +456,32 @@ function Index(props) {
 
   //console.log(netSales, totalLoadedAmount, transactionCount, transactionLog)
 
+  async function handleLogout(){
+
+    let route = 'http://dev-metaspf401.sunpowercorp.com:4848/logout'
+
+    let response = await fetch(`${route}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        token: props.token,
+        username: canteenUserData.username, // login canteen credentials first...
+      })
+    })
+
+    if(response.status === 200){
+      setResponseMessage(await response.json());
+      setOpenAlert(true);
+      setOpenBackrop(false)
+    }
+
+    logout();
+
+  }
 
   return (
     <Fragment>
-      <AppBarDash logout={logout} />
+      <AppBarDash logout={handleLogout} />
       <DashDate
         startDate={startDate}
         handleStartDateChange={handleStartDateChange}
