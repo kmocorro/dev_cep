@@ -491,6 +491,9 @@ function Index(props) {
         handleShiftChange={handleShiftChange}
       />
       <DashData
+        startDate={startDate}
+        endDate={endDate}
+        shift={shift}
         netSales={netSales}
         totalLoadedAmount={totalLoadedAmount}
         transactionCount={transactionCount}

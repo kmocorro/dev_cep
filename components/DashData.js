@@ -152,9 +152,10 @@ export default function DashData(props) {
                     { title: 'Amount', field: 'amount', type: 'numeric' }
                   ]}
                   data={transactionLog}
-                  title="Transaction Logs"
+                  title={`${moment(props.startDate).format('MMM DD')} to ${moment(props.endDate).format('MMM DD')} ${props.shift} Shift transaction logs`}
                   options={{
-                    exportButton: true
+                    exportButton: true,
+                    exportAllData: true
                   }}
                 />
               :
