@@ -181,7 +181,9 @@ function Index(props) {
     setOpenNext(false);
     setOpenBackrop(!openBackdrop);
 
-    let route = 'http://dev-metaspf401.sunpowercorp.com:4848/loadaccount'
+    if(openNext == false){ // counter measure. before calling the route. avoids duplicate tap/click request to server
+
+      let route = 'http://dev-metaspf401.sunpowercorp.com:4848/loadaccount'
   
       let response = await fetch(`${route}`, {
         method: 'POST',
@@ -201,6 +203,8 @@ function Index(props) {
         setOpenAlert(true);
         setOpenBackrop(false)
       }
+
+    }
 
   }
 
