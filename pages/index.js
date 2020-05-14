@@ -175,9 +175,32 @@ function Index(props) {
 
   }
 
+  async function handleLogout(){
+
+    let route = 'http://dev-metaspf401.sunpowercorp.com:4848/logout'
+
+    let response = await fetch(`${route}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        token: props.token,
+        username: canteenUserData.username, // login canteen credentials first...
+      })
+    })
+
+    if(response.status === 200){
+      setResponseMessage(await response.json());
+      setOpenAlert(true);
+      setOpenBackrop(false)
+    }
+
+    logout();
+
+  }
+
   return (
     <Fragment>
-      <AppBar logout={logout} />
+      <AppBar logout={handleLogout} />
       <Container maxWidth="sm">
         <div style={{marginTop: 20, marginBottom: 20}}>
         <Typography variant="body2" color="textSecondary" gutterBottom>Select your mode</Typography>
@@ -196,7 +219,7 @@ function Index(props) {
           <Grid item xs={12} sm={12} md={12} lg={12}>
             <Link href="/loader">
             <Button fullWidth variant="outlined"  style={{height: 200 }}>
-              <Typography variant="h6">Loading Stating / Cash-in</Typography>
+              <Typography variant="h6">Loading Station</Typography>
             </Button>
             </Link>
           </Grid>

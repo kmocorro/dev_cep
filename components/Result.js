@@ -105,7 +105,7 @@ export default function Result(props) {
             <Typography color="textSecondary" align="left">Select amount</Typography>
             <Typography className={classes.accountValues} align="left" variant="h5" gutterBottom>Cash-In</Typography>
           </Grid>
-          <Grid item xs={4} sm={4} md={4} lg={4}>
+          <Grid item xs={3} sm={3} md={3} lg={3}>
             {
               props.selectCash100 ?
               <Button fullWidth className={classes.button} variant="contained" color="secondary" onClick={props.handleCashOnToggle100}>
@@ -117,7 +117,7 @@ export default function Result(props) {
               </Button>
             }
           </Grid>
-          <Grid item xs={4} sm={4} md={4} lg={4}>
+          <Grid item xs={3} sm={3} md={3} lg={3}>
             {
               props.selectCash200 ?
               <Button fullWidth className={classes.button} variant="contained" color="secondary" onClick={props.handleCashOnToggle200}>
@@ -129,7 +129,7 @@ export default function Result(props) {
               </Button>
             }
           </Grid>
-          <Grid item xs={4} sm={4} md={4} lg={4}>
+          <Grid item xs={3} sm={3} md={3} lg={3}>
             {
               props.selectCash500 ?
               <Button fullWidth className={classes.button} variant="contained" color="secondary" onClick={props.handleCashOnToggle500}>
@@ -138,6 +138,18 @@ export default function Result(props) {
               :
               <Button fullWidth className={classes.button} variant="outlined" onClick={props.handleCashOnToggle500}>
                 <Typography className={classes.accountValues}  variant="h5">₱500</Typography>
+              </Button>
+            }
+          </Grid>
+          <Grid item xs={3} sm={3} md={3} lg={3}>
+            {
+              props.selectCash1000 ?
+              <Button fullWidth className={classes.button} variant="contained" color="secondary" onClick={props.handleCashOnToggle1000}>
+                <Typography className={classes.accountValues}  variant="h5">₱1000</Typography>
+              </Button>
+              :
+              <Button fullWidth className={classes.button} variant="outlined" onClick={props.handleCashOnToggle1000}>
+                <Typography className={classes.accountValues}  variant="h5">₱1000</Typography>
               </Button>
             }
           </Grid>

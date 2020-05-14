@@ -27,6 +27,7 @@ function Index(props) {
     setSelectCash100(false);
     setSelectCash200(false);
     setSelectCash500(false);
+    setSelectCash1000(false);
   }
   const handleSearchCancel = () => {
     setEmployee_number('');
@@ -35,18 +36,21 @@ function Index(props) {
     setSelectCash100(false);
     setSelectCash200(false);
     setSelectCash500(false);
+    setSelectCash1000(false);
   }
 
   const [ selectedCashValue, setSelectedCashValue ] = useState('');
   const [ selectCash100, setSelectCash100 ] = useState(false);
   const [ selectCash200, setSelectCash200 ] = useState(false);
   const [ selectCash500, setSelectCash500 ] = useState(false);
+  const [ selectCash1000, setSelectCash1000 ] = useState(false);
 
   const handleCashOnToggle100 = () => {
     setSelectedCashValue('100')
     setSelectCash100(!selectCash100)
     setSelectCash200(false)
     setSelectCash500(false)
+    setSelectCash1000(false)
     if(selectCash100){
       setSelectedCashValue('')
     }
@@ -56,6 +60,7 @@ function Index(props) {
     setSelectCash100(false)
     setSelectCash200(!selectCash200)
     setSelectCash500(false)
+    setSelectCash1000(false)
     if(selectCash200){
       setSelectedCashValue('')
     }
@@ -65,7 +70,18 @@ function Index(props) {
     setSelectCash100(false)
     setSelectCash200(false)
     setSelectCash500(!selectCash500)
+    setSelectCash1000(false)
     if(selectCash500){
+      setSelectedCashValue('')
+    }
+  }
+  const handleCashOnToggle1000 = () => {
+    setSelectedCashValue('1000')
+    setSelectCash100(false)
+    setSelectCash200(false)
+    setSelectCash500(false)
+    setSelectCash1000(!selectCash1000)
+    if(selectCash1000){
       setSelectedCashValue('')
     }
   }
@@ -89,6 +105,7 @@ function Index(props) {
     setSelectCash100(false);
     setSelectCash200(false);
     setSelectCash500(false);
+    setSelectCash1000(false)
     setOpenNext(false);
   };
 
@@ -104,6 +121,7 @@ function Index(props) {
     setSelectCash100(false);
     setSelectCash200(false);
     setSelectCash500(false);
+    setSelectCash1000(false)
     setOpenAlert(false)
   }
 
@@ -161,28 +179,28 @@ function Index(props) {
 
   async function handleSubmitLoadAccount(){
     setOpenNext(false);
-    setOpenBackrop(!openBackdrop)
+    setOpenBackrop(!openBackdrop);
 
     let route = 'http://dev-metaspf401.sunpowercorp.com:4848/loadaccount'
-
-    let response = await fetch(`${route}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        token: props.token,
-        id: userData.id,
-        username: canteenUserData.username, // login canteen credentials first...
-        organization: canteenUserData.organization,
-        available_balance: userData.available_balance,
-        load_amount: selectedCashValue
+  
+      let response = await fetch(`${route}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          token: props.token,
+          id: userData.id,
+          username: canteenUserData.username, // login canteen credentials first...
+          organization: canteenUserData.organization,
+          available_balance: userData.available_balance,
+          load_amount: selectedCashValue
+        })
       })
-    })
-
-    if(response.status === 200){
-      setResponseMessage(await response.json());
-      setOpenAlert(true);
-      setOpenBackrop(false)
-    }
+  
+      if(response.status === 200){
+        setResponseMessage(await response.json());
+        setOpenAlert(true);
+        setOpenBackrop(false)
+      }
 
   }
 
@@ -225,10 +243,12 @@ function Index(props) {
             selectCash100={selectCash100}
             selectCash200={selectCash200}
             selectCash500={selectCash500}
+            selectCash1000={selectCash1000}
             handleSearchCancel={handleSearchCancel}
             handleCashOnToggle100={handleCashOnToggle100}
             handleCashOnToggle200={handleCashOnToggle200}
             handleCashOnToggle500={handleCashOnToggle500}
+            handleCashOnToggle1000={handleCashOnToggle1000}
             selectedCashValue={selectedCashValue}
             handleSubmitLoadAccount={handleSubmitLoadAccount}
             responseMessage={responseMessage}
