@@ -84,7 +84,7 @@ export default function SignUp() {
     e.preventDefault();
     setSignUpButton(true);
 
-    let route = 'http://dev-metaspf401.sunpowercorp.com:4848/register'
+    let route = 'http://dev-metaspf401.sunpowercorp.com:5858/register'
 
     try {
         const response = await fetch(route, {
