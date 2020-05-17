@@ -35,7 +35,7 @@ export default function Navbar(props) {
           </Link>
         </IconButton>
         <Typography className={classes.appBarTitle} variant="h6" color="inherit">
-          Canteen Electronic Payment
+          DEV Canteen Electronic Payment
         </Typography>
         <Link href="/loader">
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">

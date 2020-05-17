@@ -104,12 +104,12 @@ export default function Result(props) {
           <Grid item xs={12} sm={12} md={12} lg={12}>
             <Typography color="textSecondary" align="left">Enter amount</Typography>
             <Typography className={classes.accountValues} align="left" variant="h5" gutterBottom>Cost of goods</Typography>
-            <TextField  pattern="[0-9]*" value={props.costOfGoods} onChange={props.handleOnChangeCostOfGoods} fullWidth variant="outlined" type="number" />
+            <TextField  pattern="[0-9]*" value={props.costOfGoods} onChange={props.handleOnChangeCostOfGoods} fullWidth variant="outlined" />
           </Grid>
         </Grid>
       </CardContent>
       {
-        props.costOfGoods ? 
+        props.costOfGoods && props.responseMessage.status !== '' ? 
           <>
             <CardContent>
               <Grid container>

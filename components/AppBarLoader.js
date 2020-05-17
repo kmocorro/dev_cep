@@ -35,7 +35,7 @@ export default function Navbar(props) {
           </Link>
         </IconButton>
         <Typography className={classes.appBarTitle} variant="h6" color="inherit">
-          Canteen Electronic Payment
+          DEV Canteen Electronic Payment
         </Typography>
         <Link href="/pos">
           <Tooltip title="Point-of-sale" >
