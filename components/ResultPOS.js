@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
@@ -99,73 +99,66 @@ export default function Result(props) {
         </Grid>
       </CardContent>
       <Divider />
+      <CardContent>
+        <Grid container spacing={1}>
+          <Grid item xs={12} sm={12} md={12} lg={12}>
+            <Typography color="textSecondary" align="left">Enter amount</Typography>
+            <Typography className={classes.accountValues} align="left" variant="h5" gutterBottom>Cost of goods</Typography>
+            <TextField  pattern="[0-9]*" value={props.costOfGoods} onChange={props.handleOnChangeCostOfGoods} fullWidth variant="outlined" />
+          </Grid>
+        </Grid>
+      </CardContent>
       {
-        props.openAlert !== false ?
-        <Fragment>
-          <CardContent>
-            <Grid container spacing={1}>
-              <Grid item xs={12} sm={12} md={12} lg={12}>
-                <Typography color="textSecondary" align="left">Enter amount</Typography>
-                <Typography className={classes.accountValues} align="left" variant="h5" gutterBottom>Cost of goods</Typography>
-                <TextField  pattern="[0-9]*" value={props.costOfGoods} onChange={props.handleOnChangeCostOfGoods} fullWidth variant="outlined" />
+        props.costOfGoods && props.openAlert == false ? 
+          <>
+            <CardContent>
+              <Grid container>
+                <Grid item xs={6} sm={6} md={6} lg={6}>
+                  <Typography>Total Amount </Typography>
+                </Grid>
+                <Grid item xs={6} sm={6} md={6} lg={6}>
+                  <Typography className={classes.accountValues} variant="h6"  align="right" gutterBottom>₱{props.costOfGoods}.00</Typography>
+                </Grid>
               </Grid>
-            </Grid>
-          </CardContent>
-          {
-            props.costOfGoods ? 
-              <>
-                <CardContent>
-                  <Grid container>
-                    <Grid item xs={6} sm={6} md={6} lg={6}>
-                      <Typography>Total Amount </Typography>
-                    </Grid>
-                    <Grid item xs={6} sm={6} md={6} lg={6}>
-                      <Typography className={classes.accountValues} variant="h6"  align="right" gutterBottom>₱{props.costOfGoods}.00</Typography>
-                    </Grid>
-                  </Grid>
-                </CardContent>
-                <CardActions>
-                  <Grid container spacing={1} justify="flex-end">
-                    <Grid item>
-                      <Button className={classes.buttonNext} align="right" variant="text" color="secondary" onClick={props.handleSearchCancel} >Cancel</Button>
-                    </Grid>
-                    <Grid item xs={3} sm={3} md={3} lg={3}>
-                        <Button fullWidth className={classes.buttonNext} align="right" variant="contained" color="secondary" onClick={props.handleClickOpenNext}>
-                          Next
-                        </Button>
-                      <Dialog
-                        open={props.openNext}
-                        onClose={props.handleCloseNext}
-                        aria-labelledby="alert-dialog-title"
-                        aria-describedby="alert-dialog-description"
-                      >
-                        <DialogTitle id="alert-dialog-title">{"Payment Confirmation"}</DialogTitle>
-                        <DialogContent>
-                          <DialogContentText id="alert-dialog-description">
-                            A total of ₱{props.costOfGoods}.00 will be deducted to {props.userData.name}'s account
-                          </DialogContentText>
-                        </DialogContent>
-                        <DialogActions>
-                          <Button onClick={props.handleSubmitPOS} color="secondary" autoFocus variant="contained">
-                            Confirm
-                          </Button>
-                          <Button onClick={props.handleCloseNext} color="default">
-                            Cancel
-                          </Button>
-                        </DialogActions>
-                      </Dialog>
-                      <Backdrop className={classes.backdrop} open={props.openBackdrop}>
-                        <CircularProgress color="inherit" />
-                      </Backdrop>
-                    </Grid>
-                  </Grid>
-                </CardActions>
-              </>
-            : <></>
-          }
-        </Fragment>
-        :
-        <></>
+            </CardContent>
+            <CardActions>
+              <Grid container spacing={1} justify="flex-end">
+                <Grid item>
+                  <Button className={classes.buttonNext} align="right" variant="text" color="secondary" onClick={props.handleSearchCancel} >Cancel</Button>
+                </Grid>
+                <Grid item xs={3} sm={3} md={3} lg={3}>
+                    <Button fullWidth className={classes.buttonNext} align="right" variant="contained" color="secondary" onClick={props.handleClickOpenNext}>
+                      Next
+                    </Button>
+                  <Dialog
+                    open={props.openNext}
+                    onClose={props.handleCloseNext}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                  >
+                    <DialogTitle id="alert-dialog-title">{"Payment Confirmation"}</DialogTitle>
+                    <DialogContent>
+                      <DialogContentText id="alert-dialog-description">
+                        A total of ₱{props.costOfGoods}.00 will be deducted to {props.userData.name}'s account
+                      </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                      <Button onClick={props.handleSubmitPOS} color="secondary" autoFocus variant="contained">
+                        Confirm
+                      </Button>
+                      <Button onClick={props.handleCloseNext} color="default">
+                        Cancel
+                      </Button>
+                    </DialogActions>
+                  </Dialog>
+                  <Backdrop className={classes.backdrop} open={props.openBackdrop}>
+                    <CircularProgress color="inherit" />
+                  </Backdrop>
+                </Grid>
+              </Grid>
+            </CardActions>
+          </>
+        : <></>
       }
     </Paper>
   );
