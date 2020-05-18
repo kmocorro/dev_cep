@@ -238,7 +238,7 @@ function Index(props) {
       <ResultLayout>
       { 
         userData ?
-          userData.id == employee_number && props.responseMessage.status == '' ?  // will be replaced soon... with data from the server.
+          userData.id == employee_number && responseMessage.status == '' ?  // will be replaced soon... with data from the server.
           <ResultPOS 
             userData={userData}
             selectCash100={selectCash100}
