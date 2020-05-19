@@ -141,7 +141,6 @@ export default function Result(props) {
               </Button>
             }
           </Grid>
-          { /*
           <Grid item xs={3} sm={3} md={3} lg={3}>
             {
               props.selectCash1000 ?
@@ -154,7 +153,6 @@ export default function Result(props) {
               </Button>
             }
           </Grid>
-          */ }
         </Grid>
       </CardContent>
       {
