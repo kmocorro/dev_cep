@@ -19,6 +19,7 @@ function Index(props) {
   //console.log(userData);
   const handleEmployeeNumberOnClick = () => {
     setOpenAlert(false)
+    setSubmitLoadAccountButton(false);
   }
   const handleEmployeeNumberOnChange = (e) => {
     setEmployee_number(e.target.value);
@@ -123,6 +124,7 @@ function Index(props) {
     setSelectCash500(false);
     setSelectCash1000(false)
     setOpenAlert(false)
+    setSubmitLoadAccountButton(false);
   }
 
   // get acccount info ----------
@@ -177,7 +179,10 @@ function Index(props) {
     fetchAccountInfo()
   }, [employee_number])
 
+  const [ submitLoadAccountButton, setSubmitLoadAccountButton ] = useState(false);
+
   async function handleSubmitLoadAccount(){
+    setSubmitLoadAccountButton(true);
     setOpenNext(false);
     setOpenBackrop(!openBackdrop);
 
@@ -230,7 +235,7 @@ function Index(props) {
 
   return (
     <Fragment>
-      <AppBarLoader logout={handleLogout} />
+      <AppBarLoader logout={logout} />
       <ScanLayout>
         <Scan employee_number={employee_number} handleEmployeeNumberOnChange={handleEmployeeNumberOnChange} handleEmployeeNumberOnClick={handleEmployeeNumberOnClick} />
       </ScanLayout>
@@ -260,6 +265,7 @@ function Index(props) {
             handleClickCloseAlert={handleClickCloseAlert}
             openBackdrop={openBackdrop}
             canteenUserData={canteenUserData}
+            submitLoadAccountButton={submitLoadAccountButton}
           />
           :<></>
         :<></>

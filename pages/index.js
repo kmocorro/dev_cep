@@ -183,8 +183,7 @@ function Index(props) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        token: props.token,
-        username: canteenUserData.username, // login canteen credentials first...
+        username: canteenUserData.username || '', // login canteen credentials first...
       })
     })
 
@@ -200,7 +199,7 @@ function Index(props) {
 
   return (
     <Fragment>
-      <AppBar logout={handleLogout} />
+      <AppBar logout={logout} canteenUserData={canteenUserData} />
       <Container maxWidth="sm">
         <div style={{marginTop: 20, marginBottom: 20}}>
         <Typography variant="body2" color="textSecondary" gutterBottom>Select your mode</Typography>

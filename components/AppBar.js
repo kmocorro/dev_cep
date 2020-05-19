@@ -18,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
   },
   appBarTitle: {
     flex: 1
+  },
+  user: {
+    marginRight: 20
   }
 }));
 
@@ -31,7 +34,10 @@ export default function Navbar(props) {
           <EmojiFoodBeverageOutlined />
         </IconButton>
         <Typography className={classes.appBarTitle} variant="h6" color="inherit">
-          Canteen Electronic Payment
+          DEV Canteen Electronic Payment DEVDEVDEVDEVDEVDEVDEVDEVDEVDEV
+        </Typography>
+        <Typography className={classes.user}>
+          {props.canteenUserData.username}
         </Typography>
         <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={props.logout}>
           <ExitToAppOutlined />

@@ -19,6 +19,7 @@ function Index(props) {
   //console.log(userData);
   const handleEmployeeNumberOnClick = () => {
     setOpenAlert(false)
+    setSubmitPOSbutton(false);
   }
   const handleEmployeeNumberOnChange = (e) => {
     setEmployee_number(e.target.value);
@@ -90,6 +91,7 @@ function Index(props) {
     setEmployee_number('');
     setCostOfGoods('');
     setOpenAlert(false);
+    setSubmitPOSbutton(false);
   }
 
   // cost of goods ---------------
@@ -178,9 +180,12 @@ function Index(props) {
 
   }
 
+  const [ submitPOSbutton, setSubmitPOSbutton ] = useState(false);
+
   async function handleSubmitPOS(){
+    setSubmitPOSbutton(true);
     setOpenNext(false);
-    setOpenBackrop(!openBackdrop)
+    setOpenBackrop(!openBackdrop);
 
     let route = 'http://dev-metaspf401.sunpowercorp.com:5858/pointofsaletransaction'
 
@@ -231,7 +236,7 @@ function Index(props) {
 
   return (
     <Fragment>
-      <AppBarPOS logout={handleLogout} />
+      <AppBarPOS logout={logout} />
       <ScanLayout>
         <ScanPOS employee_number={employee_number} handleEmployeeNumberOnChange={handleEmployeeNumberOnChange} handleEmployeeNumberOnClick={handleEmployeeNumberOnClick} autoFocus={true} />
       </ScanLayout>
@@ -262,6 +267,7 @@ function Index(props) {
             costOfGoods={costOfGoods}
             handleOnChangeCostOfGoods={handleOnChangeCostOfGoods}
             handleSubmitPOS={handleSubmitPOS}
+            submitPOSbutton={submitPOSbutton}
           />
           :<></>
         :<></>
