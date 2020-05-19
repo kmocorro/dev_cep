@@ -40,6 +40,9 @@ export default function Navbar(props) {
         <Typography className={classes.appBarTitle} variant="h6" color="inherit">
           DEV Canteen Electronic Payment DEVDEVDEVDEVDEVDEVDEVDEVDEVDEV
         </Typography>
+        <Typography className={classes.user}>
+          {props.canteenUserData.username}
+        </Typography>
         <Link href="/pos">
           <Tooltip title="Point-of-sale" >
             <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" >
