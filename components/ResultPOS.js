@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
@@ -18,6 +19,35 @@ import Collapse from '@material-ui/core/Collapse';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import NumberFormat from 'react-number-format';
+function NumberFormatCustom(props) {
+  const { inputRef, onChange, ...other } = props;
+
+  return (
+    <NumberFormat
+      {...other}
+      getInputRef={inputRef}
+      onValueChange={(values) => {
+        onChange({
+          target: {
+            name: props.name,
+            value: values.value,
+          },
+        });
+      }}
+      thousandSeparator
+      isNumericString
+      prefix="₱"
+    />
+  );
+}
+
+NumberFormatCustom.propTypes = {
+  inputRef: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
+
 
 const useStyles = makeStyles((theme) => ({
   result: {
@@ -104,7 +134,15 @@ export default function Result(props) {
           <Grid item xs={12} sm={12} md={12} lg={12}>
             <Typography color="textSecondary" align="left">Enter amount</Typography>
             <Typography className={classes.accountValues} align="left" variant="h5" gutterBottom>Cost of goods</Typography>
-            <TextField  pattern="[0-9]*" value={props.costOfGoods} onChange={props.handleOnChangeCostOfGoods} fullWidth variant="outlined" />
+            <TextField  
+              pattern="[0-9]*" 
+              value={props.costOfGoods} 
+              onChange={props.handleOnChangeCostOfGoods} 
+              fullWidth variant="outlined" 
+              InputProps={{
+                inputComponent: NumberFormatCustom,
+              }}
+            />
           </Grid>
         </Grid>
       </CardContent>
@@ -117,7 +155,7 @@ export default function Result(props) {
                   <Typography>Total Amount </Typography>
                 </Grid>
                 <Grid item xs={6} sm={6} md={6} lg={6}>
-                  <Typography className={classes.accountValues} variant="h6"  align="right" gutterBottom>₱{props.costOfGoods}.00</Typography>
+                  <Typography className={classes.accountValues} variant="h6"  align="right" gutterBottom>₱{props.costOfGoods}</Typography>
                 </Grid>
               </Grid>
             </CardContent>
@@ -139,7 +177,7 @@ export default function Result(props) {
                     <DialogTitle id="alert-dialog-title">{"Payment Confirmation"}</DialogTitle>
                     <DialogContent>
                       <DialogContentText id="alert-dialog-description">
-                        A total of ₱{props.costOfGoods}.00 will be deducted to {props.userData.name}'s account
+                        A total of ₱{props.costOfGoods} will be deducted to {props.userData.name}'s account
                       </DialogContentText>
                     </DialogContent>
                     <DialogActions>
